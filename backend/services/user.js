@@ -1,4 +1,5 @@
 const userModel = require("../models/user");
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 function generateAuthToken(id){
@@ -8,6 +9,15 @@ function generateAuthToken(id){
     }, process.env.JWT_SECRET)
 
     return token;
+}
+
+async function hashPassword(password){
+    const hashedPassword = await bcrypt.hash(password, 10)
+    return hashedPassword;
+}
+
+async function comparePassword(password1, password2){
+    return await bcrypt.compare(password1, password2)
 }
 
 async function createUser({
@@ -38,5 +48,7 @@ async function createUser({
 
 module.exports = {
     generateAuthToken,
+    hashPassword,
+    comparePassword,
     createUser
 }
