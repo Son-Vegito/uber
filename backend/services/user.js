@@ -6,7 +6,9 @@ function generateAuthToken(id){
 
     const token = jwt.sign({
         id: id
-    }, process.env.JWT_SECRET)
+    }, process.env.JWT_SECRET, {
+        expiresIn: '24h'
+    })
 
     return token;
 }

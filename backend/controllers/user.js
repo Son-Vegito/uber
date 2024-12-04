@@ -102,7 +102,24 @@ async function loginUser(req, res) {
 
 }
 
+async function getUserProfile(req, res){
+    const userID = req.userID;
+
+    const user = await userM.findById(userID);
+
+    return res.json({
+        user
+    })
+
+}
+
+function logoutUser(req, res){
+    localStorage.setItem('token', '');
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getUserProfile,
+    logoutUser
 }
