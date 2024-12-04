@@ -42,7 +42,7 @@ async function createUser({
         return user;
     }
     catch(err){
-        console.E(err);
+        console.error(err);
         throw new Error('Something went wrong')
     }
 

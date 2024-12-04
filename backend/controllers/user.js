@@ -21,6 +21,14 @@ async function registerUser(req, res) {
         })
     }
 
+    const userExist = await userM.findOne({email});
+
+    if (userExist) {
+        return res.status(400).json({
+            message: 'Email already taken'
+        })
+    }
+
     const hashedPassword = hashPassword(password);
 
     try {
